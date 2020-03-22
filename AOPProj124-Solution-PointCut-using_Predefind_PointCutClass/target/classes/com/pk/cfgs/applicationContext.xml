@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+<!-- cfgs service -->
+<bean id="calcService" class="com.pk.service.CalculatorServiceimpl"/>
+
+<!-- cfgs advice -->
+<bean id="pmAdvice" class="com.pk.advice.PerformanceMonitoringAdvice"/>
+
+<!-- cfgs custom pointcut -->
+<bean id="jremp" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+	<property name="patterns">
+		<array>
+			<value>.*a.*</value>
+			<value>.*sub</value>
+		</array>
+	</property>
+</bean>
+
+<!-- cfgs Advisior  -->
+<bean id="pmAdvisior" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+	<property name="advice" ref="pmAdvice"/>
+	<property name="pointcut" ref="jremp"/>
+</bean>
+
+<!-- cfgs proxy -->
+<bean id="pfb" class="org.springframework.aop.framework.ProxyFactoryBean">
+	<property name="target" ref="calcService"/>
+	<property name="interceptorNames">
+		<array>
+			<value>pmAdvisior</value>
+		</array>
+	</property>
+</bean>
+
+</beans>

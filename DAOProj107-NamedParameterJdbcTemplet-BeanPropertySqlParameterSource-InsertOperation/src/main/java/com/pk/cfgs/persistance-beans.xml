@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	 <!-- DataBase configuration -->
+	<bean id="vbDS" class="org.vibur.dbcp.ViburDBCPDataSource" init-method="start" destroy-method="close" >
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean>
+	
+	 
+	<!-- DataBase configuration -->
+	<!--<bean id="hikariDS" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean> -->
+	
+	<!-- Jdbc Templet -->
+	<bean id="jt" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="vbDS"/>
+	</bean>
+	
+	<context:component-scan base-package="com.pk.dao"/>
+
+</beans>

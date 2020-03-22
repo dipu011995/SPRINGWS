@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
+
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/home.jsp" access="permitAll"/>
+		<security:intercept-url pattern="/security/admin_info.jsp" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/security/facaulty_info.jsp" access="hasRole('ROLE_FACULTY')"/>
+	
+		<security:form-login/>
+		<security:access-denied-handler error-page="/access_denied.jsp"/>
+		<security:logout logout-success-url="/index.jsp"/>
+		<security:remember-me />
+		
+		<security:session-management>
+			<security:concurrency-control error-if-maximum-exceeded="true" max-sessions="2"/>
+		</security:session-management>
+		
+	</security:http>
+
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<!-- <security:user-service>
+				<security:user name="pankaj" password="{noop}kumar" authorities="ROLE_ADMIN"/>
+				<security:user name="aftab" password="{noop}alam" authorities="ROLE_FACULTY"/>
+				<security:user name="ashis" password="{noop}singh" authorities="ROLE_ADMIN,ROLE_FACULTY"/>
+			</security:user-service> -->
+			<security:password-encoder hash="bcrypt"/>
+			<security:user-service>
+				<security:user name="pankaj" password="$2a$10$zACsdivEx39xQ3cC4FgSAugWjubvhxFDmvKnlQzdC62bo14SAYToS" authorities="ROLE_ADMIN"/>
+				<security:user name="aftab" password="$2a$10$25OyOpJWnW4pb4xC9hW3I.H0hsXsEp2XOz2oTwjRGmrXmTWEPxwxK" authorities="ROLE_FACULTY"/>
+				<security:user name="ashis" password="$2a$10$25OyOpJWnW4pb4xC9hW3I.H0hsXsEp2XOz2oTwjRGmrXmTWEPxwxK" authorities="ROLE_ADMIN,ROLE_FACULTY"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

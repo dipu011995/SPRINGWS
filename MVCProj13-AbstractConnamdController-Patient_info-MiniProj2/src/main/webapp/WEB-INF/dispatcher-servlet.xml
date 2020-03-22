@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- cfg  Handler-->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="home.htm">pvc</prop>
+				<prop key="search.htm">patientController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- cfg controller -->
+	<bean id="pvc" class="org.springframework.web.servlet.mvc.ParameterizableViewController"/>
+	<bean id="patientController" class="com.pk.controller.PatientController">
+		<property name="commandClass" value="com.pk.cmdClass.PatientCommand" />
+		<property name="commandName" value="cmd" />
+		<constructor-arg ref="patientService" />
+	</bean>
+	
+	<!-- cfgs view resolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

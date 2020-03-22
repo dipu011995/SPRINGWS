@@ -1,0 +1,35 @@
+SQL> CREATE TABLE USER_LIST (USER_NAME VARCHAR2(20),PWD VARCHAR2(20));
+
+
+SQL> SELECT * FROM USER_LIST;
+USER_NAME            PWD
+-------------------- --------------------
+raja            			     rani
+pankaj            		     lucky
+dipu              		     alaka
+sid               			     bhol
+
+
+
+CREATE OR REPLACE PROCEDURE P_AUTH (USER IN VARCHAR2,PASS IN VARCHAR2,RESULT OUT VARCHAR2) AS 
+	cnt number(2); 
+  BEGIN SELECT COUNT(*) FROM USER_LIST WHERE USER_NAME =USER AND PWD = PASS 
+	if(cnt <> 0) 
+	   return "valid crediential" 
+	else 
+	   "invalid credential";
+  	endif;
+  END;/
+
+
+
+CREATE OR REPLACE PROCEDURE P_AUTH (USER IN VARCHAR2,PASS IN VARCHAR2,RESULT OUT VARCHAR2) AS 
+	cnt number(2); 
+  BEGIN 
+     SELECT COUNT(*) into cnt FROM USER_LIST WHERE USER_LIST.USER_NAME = USER AND USER_LIST.PWD = PASS 
+	if(cnt <> 0) 
+	   return "valid crediential";
+	else 
+	   "invalid credential";
+  	endif;
+  END;/

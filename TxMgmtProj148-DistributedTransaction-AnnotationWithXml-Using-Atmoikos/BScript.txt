@@ -1,0 +1,10 @@
+SQL> CREATE TABLE ORA_DTS_ACCOUNT (ACCNO NUMBER(10),ACCHNAME VARCHAR2(20),BALANCE NUMBER(10,2));
+
+SQL> INSERT INTO ORA_DTS_ACCOUNT VALUES(1001,'PANKAJ',80000);
+
+for my sql
+--------------
+schema:: ntps611db
+user::  root
+password:: root
+table name:: mysql_dts_account

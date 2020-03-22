@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- cfg  Handler-->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="home.htm">pvc</prop>
+				<prop key="openAccount.htm">cac</prop>
+				<prop key="viewAccDetails.htm">bac</prop>
+				<prop key="editAccount.htm">eadc</prop>
+				<prop key="deleteAccount.htm">dac</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- cfg pvc controller -->
+	<bean id="pvc" class="org.springframework.web.servlet.mvc.ParameterizableViewController"/>
+
+	<!-- cfgs SimpleFormController For  Create Account-->
+	<bean id="cac" class="com.pk.controller.CreateAccountController">
+		<constructor-arg ref="accService" />
+		<property name="commandName" value="accountCmd" />
+		<property name="commandClass" value="com.pk.command.AccountDetails" />
+		<property name="formView" value="open_account" />
+		<property name="successView" value="result" />
+		<property name="sessionForm" value="true" />
+	</bean>
+	
+	<!-- Abstract Controller for View All Contact -->
+	<bean id="bac" class="com.pk.controller.ViewAccountDetailsController">
+		<constructor-arg ref="accService" />
+	</bean>
+	
+	<!-- cfgs SimpleFormController For  Edit Account Details By AccNo-->
+	<bean id="eadc" class="com.pk.controller.EditAccountDetailsController">
+		<constructor-arg ref="accService" />
+		<property name="commandName" value="editCmd" />
+		<property name="commandClass" value="com.pk.command.AccountDetails" />
+		<property name="formView" value="edit_account" />
+		<property name="successView" value="edit_account_Result" />
+		<property name="sessionForm" value="true" />
+	</bean>
+	
+	<!-- cfgs Abstract For  Delete Account Details By AccNo-->
+	<bean id="dac" class="com.pk.controller.DeleteAccountController">
+		<constructor-arg ref="accService" />
+	</bean>
+	
+	
+	<!-- cfgs view resolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- cfgs mappring -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="welcome.htm">pvc</prop>
+				<prop key="wish.htm">wmg</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="pvc" class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
+	<bean id="wmg" class="com.pk.controller.WishMessageGenerator" >
+		<constructor-arg ref="wishService" />
+	</bean>
+	
+	
+	<bean id=""></bean>
+	
+	
+	<!-- cfgs view resolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+</beans>

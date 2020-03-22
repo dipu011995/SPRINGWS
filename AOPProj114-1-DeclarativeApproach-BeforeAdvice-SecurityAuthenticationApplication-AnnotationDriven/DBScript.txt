@@ -1,0 +1,28 @@
+SQL> CREATE TABLE USER_AUTHENTICATION (USERNAME VARCHAR2(15),PASSWORD VARCHAR2(15));
+
+SQL> insert into USER_AUTHENTICATION values ('raja','rani');
+SQL> insert into USER_AUTHENTICATION values ('pankaj','lucky');
+SQL> insert into USER_AUTHENTICATION values ('ramesh','jani');
+
+
+SQL> CREATE TABLE BANK_SERVICE (ACCNO NUMBER(16) PRIMARY KEY,ACCHNAME VARCHAR2(20),BALANCE NUMBER(10,2));
+
+SQL> INSERT INTO BANK_SERVICE VALUES (101,'pankaj',50000);
+SQL> INSERT INTO BANK_SERVICE VALUES (102,'raja',80000);
+SQL> INSERT INTO BANK_SERVICE VALUES (103,'ramesh',100000);
+
+
+
+SQL> SELECT * FROM USER_AUTHENTICATION;
+USERNAME        PASSWORD
+--------------- 			---------------
+raja          			  rani
+pankaj     		     lucky
+ramesh     		     jani
+
+SQL> SELECT * FROM BANK_SERVICE;
+     ACCNO 		ACCHNAME                BALANCE
+	---------- 		--------------------			 ----------
+       101 				pankaj                    50000
+       102				 raja                        80000
+       103				 ramesh                  100000

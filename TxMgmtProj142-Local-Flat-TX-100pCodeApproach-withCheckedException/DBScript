@@ -1,0 +1,5 @@
+SQL> CREATE TABLE TX_ACCOUNT(ACNO NUMBER(10) PRIMARY KEY,ACCHNAME VARCHAR2(20),BALANCE NUMBER(10,2));
+
+SQL> insert into TX_ACCOUNT values(1001,'pankaj',80000);
+SQL> insert into TX_ACCOUNT values(1002,'lucky',70000);
+SQL> insert into TX_ACCOUNT values(1003,'alaka',60000);

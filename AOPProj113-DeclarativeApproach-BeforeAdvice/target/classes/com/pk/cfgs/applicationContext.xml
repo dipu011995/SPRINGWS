@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<!-- target class configuration -->
+	<bean id="loanService" class="com.pk.service.BankLoanServiceImpl"/>
+	
+	<!-- Advice class configuration -->
+	<bean id="loanAdvisor" class="com.pk.adcive.BankLoanAuditorAdviser"/>
+	
+	<!-- proxy class configuration -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="loanService"/>
+		<property name="interceptorNames">
+			<array>
+				<value>loanAdvisor</value>
+			</array>
+		</property>
+	</bean>
+</beans>
